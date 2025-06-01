@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akagi 2025 – Verdania Under Control. A Dystopian Legend.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #080808;
+      color: #c5c5c5;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      padding-top: 6rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.75rem 0.5rem;
+      background-color: #000;
+      border-bottom: 2px solid #dd0000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+    nav a {
+      color: #b0b0b0;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.4rem 0.5rem;
+      border-radius: 0.3rem;
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 0.8rem;
+      border: 1px solid transparent;
+    }
+    nav a:hover, nav a.active-nav-link {
+      color: #ff1a1a;
+      background-color: #1a1a1a;
+      border-color: #440000;
+    }
+    section {
+      display: none;
+      padding: 2rem 1.5rem;
+      border-radius: 0.5rem;
+      background-color: rgba(5, 5, 5, 0.9);
+      margin: 1.5rem 1rem;
+      border: 1px solid #1f1f1f;
+      box-shadow: 0 0 15px rgba(255,0,0,0.1);
+    }
+    section.active {
+      display: block;
+    }
+    header {
+      text-align: center;
+      margin: 1rem 1rem 2rem;
+      text-shadow: 1px 1px 8px #000;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 4rem);
+      font-weight: bold;
+      color: #dd0000;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 7vw, 2.2rem);
+      margin-bottom: 1.5rem;
+      color: #cc0000;
+      text-align: center;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #400000;
+    }
+    h3 {
+        font-size: clamp(1.4rem, 5vw, 1.7rem);
+        color: #c5c5c5;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px dashed #333;
+        padding-bottom: 0.3rem;
+    }
+     h3:first-child {
+        margin-top: 0.5rem;
+     }
+    p, li {
+      line-height: 1.75;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      margin-bottom: 1.2rem;
+      color: #b0b0b0;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    ul li {
+        background-color: #0f0f0f;
+        padding: 0.8rem 1rem;
+        margin-bottom: 0.6rem;
+        border-left: 4px solid #cc0000;
+        border-radius: 0.2rem;
+        color: #a0a0a0;
+        position: relative;
+    }
+    ul ul {
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        border-left: 1px dashed #303030;
+        padding-left: 1rem;
+    }
+    ul ul li {
+        background-color: #0a0a0a;
+        border-left-color: #880000;
+        font-size: 0.9em;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    @media (min-width: 768px) {
+      .section-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+    .card {
+      background-color: #1c1c1c;
+      border: 1px solid #383838;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(221, 0, 0, 0.3);
+    }
+    .card h3 {
+        color: #dd0000;
+        margin-top: 0;
+        border-bottom: 1px solid #400000;
+        padding-bottom: 0.5rem;
+    }
+
+    .content-section {
+      margin-bottom: 2rem;
+      background-color: #0a0a0a;
+      border: 1px solid #222;
+      padding: 1.5rem;
+      border-radius: 0.3rem;
+    }
+    .content-section:last-child {
+        margin-bottom: 0;
+    }
+    /* Specific padding for Join section's content block */
+    #join .content-section {
+        padding-bottom: 2rem; /* Increased bottom padding */
+    }
+
+    .street-echoes p, .notable-quote {
+      color: #ff4d4d;
+      font-style: italic;
+      margin: 1rem 0;
+      font-size: 1.2rem;
+      border-left: 4px solid #dd0000;
+      padding: 1rem 1.2rem;
+      background-color: #111;
+      border-radius: 0 0.3rem 0.3rem 0;
+      box-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+    }
+    .center { text-align: center; }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #cc0000;
+      color: #f0f0f0;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid #500000;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 5px rgba(204,0,0,0.2) inset;
+      margin-top: 2rem;
+      transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .cta-button:hover {
+      background-color: #aa0000;
+      border-color: #300000;
+      color: #fff;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 0 8px rgba(170,0,0,0.3) inset;
+    }
+    .cta-button:active {
+      transform: translateY(0px) scale(1);
+      background-color: #880000;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 0 5px rgba(136,0,0,0.2) inset;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      padding-top: 2.5rem;
+      padding-bottom: 1rem;
+      font-size: 0.85rem;
+      color: #555; /* Slightly lighter for better visibility on dark bg */
+      border-top: 1px solid #1a1a1a; /* More subtle border */
+      margin-top: 2.5rem;
+    }
+
+    .sub-quote { /* Unchanged */ }
+
+    /* Image Styling - More Dystopian */
+    .section-image, .game-asset-image {
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        border-radius: 0.3rem;
+        margin: 1.5rem auto;
+        display: block;
+        border: 1px solid #111;
+        filter: grayscale(70%) brightness(0.6) contrast(1.2) sepia(10%);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    }
+    .inline-image {
+        max-width: 220px;
+        margin: 1rem auto 0.5rem;
+        display: block;
+        border-radius: 0.2rem;
+        filter: grayscale(75%) brightness(0.5) contrast(1.3) blur(0.3px);
+        border: 1px solid #000;
+    }
+    .list-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.2rem;
+        margin-top: 0.5rem;
+        filter: grayscale(60%) brightness(0.7) contrast(1.1);
+        border: 1px solid #1a1a1a;
+    }
+    .image-caption {
+        font-size: 0.8rem;
+        color: #777;
+        text-align: center;
+        margin-top: 0.3rem;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    }
+
+    /* Testimonial Styling - Dystopian Touch */
+    .testimonial-card {
+        background-color: #101010;
+        border-left: 5px solid #aa0000;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 0.3rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    }
+    .testimonial-card p {
+        font-size: 1.05rem;
+        color: #a0a0a0;
+        margin-bottom: 0.75rem;
+        font-style: italic;
+    }
+    .testimonial-card .cite {
+        display: block;
+        text-align: right;
+        font-weight: bold;
+        color: #cc3333;
+        font-size: 0.95rem;
+        margin-top: 1rem;
+    }
+
+    *:focus-visible { /* Unchanged */ }
+
+    /* Message Box Styles */
+    .message-box-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        backdrop-filter: blur(3px); /* Added blur effect */
+        -webkit-backdrop-filter: blur(3px); /* For Safari */
+    }
+    .message-box-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    .message-box {
+        background-color: #0f0f0f; /* Darker message box */
+        padding: 2.5rem; /* Increased padding */
+        border-radius: 0.3rem; /* Sharper radius */
+        border: 1px solid #dd0000; /* Akagi red border */
+        box-shadow: 0 0 20px rgba(221, 0, 0, 0.3); /* More prominent red glow */
+        text-align: center;
+        max-width: 90%;
+        width: 450px; /* Slightly wider */
+        color: #c5c5c5;
+    }
+    .message-box h3 {
+        color: #dd0000;
+        margin-top: 0;
+        font-size: 1.5rem; /* Larger title */
+        margin-bottom: 1rem;
+    }
+    .message-box p {
+        color: #b0b0b0;
+        margin-bottom: 2rem; /* More space before button */
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .message-box button {
+      background-color: #cc0000;
+      color: #f0f0f0;
+      border: 1px solid #500000;
+      padding: 0.7rem 1.5rem; /* Consistent padding */
+      border-radius: 0.3rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .message-box button:hover {
+      background-color: #aa0000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop hidden>
+    <source src="https://files.catbox.moe/8v3vav.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <nav id="mainNav">
+    <a href="#home" onclick="switchTab('home', event)">Home</a>
+    <a href="#profile" onclick="switchTab('profile', event)">Profile</a>
+    <a href="#platform" onclick="switchTab('platform', event)">Platform</a>
+    <a href="#street_echoes" onclick="switchTab('street_echoes', event)">Echoes</a>
+    <a href="#record" onclick="switchTab('record', event)">Record</a>
+    <a href="#testimonials" onclick="switchTab('testimonials', event)">Voices</a>
+    <a href="#verdania_info" onclick="switchTab('verdania_info', event)">Verdania</a>
+    <a href="#blueprint" onclick="switchTab('blueprint', event)">Blueprint</a>
+    <a href="#join" onclick="switchTab('join', event)">Join</a>
+  </nav>
+
+  <section id="home" class="active">
+    <header>
+      <h1>AKAGI 2025</h1>
+      <p style="font-size: 1.5rem; color: #ff4d4d;"><em>“Verdania Demands Order. I Am Control.”</em></p>
+      <p>Chaos is a symptom. Inefficiency, a disease. Akagi offers the only cure: absolute, pragmatic control. Hope is a luxury Verdania cannot afford. Stability is a necessity Akagi will enforce.</p>
+       <p class="notable-quote" style="font-size: 1.2rem; margin-top: 2rem;">“This city isn't broken. It's undisciplined. I will provide the discipline.”</p>
+    </header>
+  </section>
+
+  <section id="profile">
+    <h2>Candidate Profile: Akagi</h2>
+    <div class="content-section">
+        <h3>The Architect of Order</h3>
+        <p>Akagi is not your harbinger of hope, nor a charismatic revolutionary. He is a systems analyst, a pragmatist who sees Verdania not as a society to be inspired, but as a complex mechanism to be calibrated and controlled. He promises not a brighter future, but a functional one.</p>
+    </div>
+    <img src="images/fairfieldsheriffsoffice.png" alt="Fairfield Sheriff's Office under Akagi's influence" class="game-asset-image">
+    <p class="image-caption">The instruments of order, finely tuned. Akagi's influence permeates all structures.</p>
+    <div class="content-section">
+        <h3>Origins: The Administrator's Shadow</h3>
+        <p>Forged in the labyrinthine bureaucracy of Verdania’s underbelly, Akagi mastered the art of influence long before stepping into the public gaze. As a civic strategist and an advisor to municipal enforcers, his currency was never headlines, only outcomes. He didn't rise through oratory, but through the silent, effective orchestration of power. When his name finally surfaced, the groundwork for control was already laid.</p>
+    </div>
+    <div class="content-section">
+        <h3>Persona: Unwavering. Unflinching. In Control.</h3>
+        <p>Akagi's presence is defined by its unnerving composure. His voice, rarely raised, delivers directives with chilling clarity. Impeccably attired, his posture unwavering, he addresses urban decay and criminal enterprise as mere variables in a complex equation. To him, chaos is data; control is the algorithm.</p>
+        <p class="notable-quote">“I don’t debate. I define reality.”</p>
+        <p>He absorbs dissent with an unnerving calm, his responses not arguments, but corrections. His supporters don't cheer; they comprehend. They see not a savior, but the necessary hand on a fractured system.</p>
+    </div>
+  </section>
+
+  <section id="platform">
+    <h2>Policy Pillars: The Iron Doctrine</h2>
+    <div class="section-grid">
+        <div class="card">
+            <h3>🛡️ Enforcement Recalibrated</h3>
+            <p>Officers retrained for absolute execution, devoid of sentiment. Loyalty cultivated through structured incentives, shielded from public opinion. Command centralized under tactical, not political, leadership. The Fairfield Sheriff's Office is merely the first example.</p>
+        </div>
+        <div class="card">
+            <h3>🔫 Armament Parity</h3>
+            <p>State-controlled firearm distribution, subsidized for universal access via outlets like Spe's Hunting Supply. Mandatory ID-linked registration ensures accountability. No citizen will be outmatched in their designated zone of residence.</p>
+            <img src="images/speshunting.png" alt="Spe's Hunting Supply - Armament for the compliant" class="inline-image">
+            <p class="image-caption">Tools of order, distributed by the state.</p>
+        </div>
+        <div class="card">
+            <h3>🧠 Syndicate Management</h3>
+            <p>Covert channels with organized crime will demarcate operational zones and formalize tribute systems. Transgressions met with swift, decisive consequences. Akagi’s office: the final arbiter in all sanctioned underground economies, from Easy Pawn's backrooms to Taco Titan's supply lines.</p>
+             <img src="images/tacotitaneasypawn.png" alt="Easy Pawn and Taco Titan - Commerce under Akagi's terms" class="inline-image">
+             <p class="image-caption">Regulated enterprises, contributing to the new order.</p>
+        </div>
+        <div class="card">
+            <h3>🗺️ Directed Urban Structuring</h3>
+            <p>Verdania re-zoned into sectors of high, medium, and low regulation, each with its own enforcement protocols. Chaos converted to predictable patterns under centrally managed local enforcers. The streets will be managed, not 'safe' in the traditional sense.</p>
+        </div>
+    </div>
+    <div class="content-section center">
+        <h3>Core Mandate</h3>
+        <p>Akagi’s authority is not a promise of utopia, but a guarantee of operational stability. Police will execute, not deliberate. Citizens will be equipped for self-preservation within defined boundaries. Conflict will be managed, rerouted, and, where necessary, utilized. Verdania will function. Predictably.</p>
+        <p>Corruption, under Akagi, is merely the consolidation of influence. This city doesn't require moral purity; it demands efficient power distribution. Akagi ensures that distribution answers to him.</p>
+    </div>
+  </section>
+
+  <section id="street_echoes">
+    <h2>Echoes from the Concrete</h2>
+    <div class="content-section">
+        <p class="notable-quote">"Red tape? Under Akagi, it's a tripwire."</p>
+        <p class="notable-quote">"Justice here doesn't wear a blindfold. It wears a badge loyal to Akagi."</p>
+        <p class="notable-quote">"The shadows voted. Akagi won their primary."</p>
+        <p class="notable-quote">"Crime isn't fought. It's itemized on Akagi's budget."</p>
+        <p class="notable-quote">"A bullet's cheaper than bread? That's Akagi's kind of stimulus."</p>
+        <p class="notable-quote">"Democracy is a focus group. Akagi delivers the final product."</p>
+        <p class="notable-quote">"Gangs don't fear cops anymore. They fear Akagi's auditors."</p>
+        <p class="notable-quote">"There's a wolf at Verdania's door. Akagi holds the leash."</p>
+        <p class="notable-quote">“We don’t eliminate crime. We regulate its profit margins.”</p>
+        <p class="notable-quote">“Fairness is a fairy tale. Certainty is a contract I enforce.”</p>
+        <p class="notable-quote">“Chaos doesn’t frighten me. It’s merely an unmanaged asset.”</p>
+        <p class="notable-quote">“Your vote is a suggestion. My control is a directive.”</p>
+        <p class="notable-quote">“Every faction answers to someone. Soon, they all answer to me.”</p>
+    </div>
+  </section>
+
+  <section id="record">
+    <h2>📜 The Record: Precedents of Order</h2>
+    <div class="content-section">
+      <p>Where fractured syndicates and rogue elements once dictated terms, Akagi’s strategic interventions have already imposed a new, albeit unsettling, structure. Firearm accessibility initiatives have shifted the balance of power in designated zones. Law enforcement units, recalibrated and retasked, now operate with chilling efficiency, their protocols superseding personal judgment. Independent gang operations have been absorbed into a hierarchical system, their activities rerouted, their profits... streamlined. Violence has not been eradicated; it has been made predictable, a tool under new management.</p>
+      <p>The tangible outcomes: fewer unsanctioned casualties, armament costs stabilized, and a pervasive, controlled quiet on the streets. Verdania is not a utopia. It is a testament to effective, uncompromising control.</p>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>Whispers from Verdania: Citizen Accounts</h2>
+    <div class="testimonial-card">
+        <p>"The Fairfield Sheriff's Office? They used to be a joke. Now, you don't see them unless Akagi wants you to see them. My little stall near the square is 'safer,' they say. Less random trouble, more... structured oversight."</p>
+        <span class="cite">- Anya S., Fairfield Market Vendor</span>
+    </div>
+    <div class="testimonial-card">
+        <p>"Got my 'citizen defense permit' and a voucher for Spe's Hunting Supply. Akagi says an armed populace is a polite populace. Or at least, a predictable one. Can't argue with the discount, or the quiet nights."</p>
+        <span class="cite">- Marcus "Mac" C., Benton Retiree</span>
+    </div>
+    <div class="testimonial-card">
+        <p>"My routes through the Benton Warehouse district are clear now. The 'tolls' are standardized, paid to Akagi's men. No more surprise 'inspections' by local thugs. It's efficient. Cold, but efficient."</p>
+        <span class="cite">- Jian L., Verdania Haulage</span>
+    </div>
+    <div class="testimonial-card">
+        <p>"People at Towntown Pizza whisper Akagi's name like he's the boogeyman or a god. Truth is, he's just good at math. The protection rackets pay him, the cops listen to him, and the rest of us? We just try to stay out of the red on his ledger."</p>
+        <span class="cite">- "Silas," Frequenter of Easy Pawn</span>
+    </div>
+  </section>
+
+  <section id="verdania_info">
+    <h2>Verdania: The State Under New Management</h2>
+    <div class="content-section">
+        <h3>A Territory Requiring Mandate</h3>
+        <p>Verdania, a sprawling state of contradictions, from its decaying urban cores to its loosely governed outer territories, has long suffered from a vacuum of decisive leadership. Its potential is undeniable, its current state of disarray, intolerable. My administration will not 'heal' Verdania; it will bring it to heel.</p>
+    </div>
+    <div class="content-section">
+        <h3>Urban Centers: Operational Directives</h3>
+        <p>Control of Verdania's primary urban centers is non-negotiable. Each will serve a purpose within the greater structure:</p>
+        <ul>
+            <li><strong>Benton:</strong> The industrial heartland. Production quotas and labor forces streamlined.
+                <img src="images/bentonwarehouse.png" alt="Benton Warehouse - Industrial Order" class="list-image">
+                <p class="image-caption">Benton Warehouse: Engine of the new economy.</p>
+            </li>
+            <li><strong>Fairfield:</strong> The commercial and administrative nexus. Its institutions are now instruments of policy:
+                <ul>
+                    <li><em>The Bank:</em> Financial arteries rerouted.</li>
+                    <li><em>Downtown Pizza:</em> A model for regulated local commerce.
+                        <img src="images/pizza.png" alt="Downtown Pizza - Regulated Sustenance" class="list-image">
+                        <p class="image-caption">Downtown Pizza: Predictable supply, controlled pricing.</p>
+                    </li>
+                    <li><em>The Post Office:</em> Communications monitored.</li>
+                    <li><em>Low Note Music Store:</em> Cultural outputs curated.</li>
+                    <li><em>Weight Obliterators Fast Food:</em> Public sustenance, strict protocols.
+                         <img src="images/fastfood.png" alt="Weight Obliterators - Functional Populace" class="list-image">
+                         <p class="image-caption">Weight Obliterators: Ensuring a functional populace.</p>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Newbury:</strong> Primarily residential, a testbed for advanced surveillance.</li>
+        </ul>
+    </div>
+    <div class="content-section">
+        <h3>Statewide Establishments: Assets Realigned</h3>
+        <p>Across Verdania, key locations and enterprises will be integrated into Akagi's operational matrix:</p>
+        <ul>
+            <li><em>Verdania Times News:</em> Conduit for official narratives.</li>
+            <li><em>Sheriff & Police Departments (Statewide):</em> Unified command, unwavering loyalty. (Ref: Fairfield Sheriff's Office)</li>
+            <li><em>Wallmart (Regional Distribution Centers):</em> Essential goods distribution optimized.</li>
+            <li><em>The Gambling Den (Various Locations):</em> Illicit economies to state-regulated revenue. Vice, managed and taxed.</li>
+            <li><em>The Library (Public Archives):</em> Information repositories, curated to support state objectives and historical narratives.</li>
+            <li><em>Draco's Clothing Store & similar retail (e.g., Mug Life, Chillys):</em> Consumer markets managed.
+                <img src="images/chillys.png" alt="Retail outlets like Chillys and Mug Life" class="list-image">
+                <p class="image-caption">Retail: Consumption managed, style uniform.</p>
+            </li>
+            <li><em>Taco Titan, Broke R Us, Easy Pawn, Waffle Place of Residence:</em> Local commerce under strict frameworks.
+                 <img src="images/waffleplaceofresidence.png" alt="Waffle Place of Residence" class="list-image">
+                 <p class="image-caption">Waffle Place of Residence: Basic needs, controlled economy.</p>
+            </li>
+             <li><em>Screw It Hardware:</em> Essential supplies, managed distribution.
+                <img src="images/screwit.png" alt="Screw It Hardware" class="list-image">
+                <p class="image-caption">Screw It Hardware: Tools for a compliant society.</p>
+            </li>
+            <li><em>Nuki's Used Auto:</em> Transportation resources, monitored.
+                 <img src="images/usedauto.png" alt="Nuki's Used Auto" class="list-image">
+                 <p class="image-caption">Nuki's Used Auto: Mobility under observation.</p>
+            </li>
+
+        </ul>
+        <p><em>Every square kilometer of Verdania, every transaction, every citizen, will be accounted for within the Akagi framework. This is not tyranny. This is meticulous, inescapable order.</em></p>
+    </div>
+  </section>
+
+  <section id="blueprint">
+    <h2>📈 The Blueprint: Verdania Solidified</h2>
+    <div class="content-section">
+      <p>The final phases of Akagi's restructuring will see Verdania fully integrated. Urban re-zoning will assign explicit security doctrines to each district: state-licensed syndicate presence, absolute police dominance, or community-enforced equilibrium. The police budget will be decentralized to precinct commanders loyal to Akagi, ensuring rapid, localized enforcement without bureaucratic delay. Firearm subsidies will extend to ensure armament parity within designated civilian sectors.</p>
+      <p>This is not a vision of peace through harmony, but a blueprint for sustained, weaponized order. Those who integrate will find their place. Those who resist will be systematically dismantled.</p>
+    </div>
+    <div class="content-section center" style="margin-top: 2rem;">
+        <h3>The Inevitable Conclusion</h3>
+        <p>Akagi does not seek your affection; he demands your compliance. He doesn't promise a revolution; he guarantees operational supremacy. Verdania is a complex, volatile machine. It requires a firm, unyielding hand.</p>
+        <p class="notable-quote" style="font-size: 1.2rem;">Your vote is an acknowledgment of the inevitable. Akagi's control is already in motion.</p>
+    </div>
+  </section>
+
+  <section id="join" class="center">
+    <div class="content-section" style="max-width: 650px; margin-left: auto; margin-right: auto; padding-top: 2rem; padding-bottom: 2rem;"> <h2>Become Part of the Mechanism</h2>
+      <p style="font-size: 1.1em; color: #c5c5c5;">Verdania's future is being forged. Find your place in the new order. Akagi's control is absolute. Your compliance is expected. Your loyalty, rewarded.</p>
+      <button class="cta-button" id="signUpButton">Pledge Loyalty</button>
+      <div class="footer-copyright">
+        <p>© 2025 Akagi Campaign. Verdania: Calibrated. Controlled. Complete.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="messageBoxOverlay" class="message-box-overlay">
+      <div class="message-box">
+          <h3 id="messageBoxTitle">Directive Received</h3>
+          <p id="messageBoxText">This is a message.</p>
+          <button id="messageBoxClose">Acknowledge</button>
+      </div>
+  </div>
+
+  <script>
+    function showMessage(title, text) {
+        const messageBoxTitleEl = document.getElementById('messageBoxTitle');
+        const messageBoxTextEl = document.getElementById('messageBoxText');
+        const overlayEl = document.getElementById('messageBoxOverlay');
+
+        if (messageBoxTitleEl && messageBoxTextEl && overlayEl) {
+            messageBoxTitleEl.textContent = title;
+            messageBoxTextEl.textContent = text;
+            overlayEl.classList.add('visible');
+        } else {
+            console.error("Message box elements not found.");
+        }
+    }
+
+    const messageBoxCloseButton = document.getElementById('messageBoxClose');
+    if (messageBoxCloseButton) {
+        messageBoxCloseButton.addEventListener('click', () => {
+            const overlayEl = document.getElementById('messageBoxOverlay');
+            if (overlayEl) {
+                overlayEl.classList.remove('visible');
+            }
+        });
+    }
+
+    const signUpButton = document.getElementById('signUpButton');
+    if (signUpButton) {
+        signUpButton.addEventListener('click', () => {
+            showMessage('Loyalty Acknowledged', 'Your pledge to Akagi\'s vision for Verdania has been logged. Your assigned operative will provide further instructions regarding your role within the new framework. Compliance ensures your place. Deviation will be... corrected.');
+        });
+    }
+
+    function switchTab(tabId, event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      const bgMusic = document.getElementById('bgMusic');
+      if (event && bgMusic && bgMusic.paused) {
+          bgMusic.play().catch(error => console.log("Audio autoplay was prevented by browser:", error));
+      }
+
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        if (section) section.classList.remove('active');
+      });
+
+      const targetSection = document.getElementById(tabId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      } else {
+        console.error(`Target section with id '${tabId}' not found.`);
+      }
+
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        if (link) {
+            link.classList.remove('active-nav-link');
+            if (link.hash === `#${tabId}`) {
+                link.classList.add('active-nav-link');
+            }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+        let initialTabId = 'home';
+
+        const initialActiveSectionHTML = document.querySelector('section.active');
+        if (initialActiveSectionHTML) {
+            initialTabId = initialActiveSectionHTML.id;
+        } else {
+            const homeSection = document.getElementById('home');
+            if (homeSection) {
+                homeSection.classList.add('active');
+            } else {
+                if (sections.length > 0 && sections[0]) {
+                    sections[0].classList.add('active');
+                    initialTabId = sections[0].id;
+                }
+            }
+        }
+
+        sections.forEach(section => {
+            if (section) {
+                if (section.id === initialTabId) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            }
+        });
+
+        navLinks.forEach(link => {
+            if (link) {
+                if (link.hash === `#${initialTabId}`) {
+                    link.classList.add('active-nav-link');
+                } else {
+                    link.classList.remove('active-nav-link');
+                }
+            }
+        });
+    });
+  </script>
+</body>
+</ht
